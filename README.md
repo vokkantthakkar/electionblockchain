@@ -1,4 +1,4 @@
-# electionblockchain
+# HashFreaks
 
 ## Idea
 
