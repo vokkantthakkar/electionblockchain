@@ -1,0 +1,246 @@
+{
+  "ApplicationName": "EVMTransportation",
+  "DisplayName": "EVMTransportation",
+  "Description": "...",
+  "ApplicationRoles": [
+    {
+      "Name": "BHEL",
+      "Description": "..."
+    },
+    {
+      "Name": "Counterparty",
+      "Description": "A party who stores or transports a shipment."
+    },
+    {
+      "Name": "Observer",
+      "Description": "..."
+    }
+  ],
+  "Workflows": [
+    {
+      "Name": "EVMTransportation",
+      "DisplayName": "EVMTransportation",
+      "Description": "Main workflow",
+      "Initiators": [ "BHEL" ],
+      "StartState": "Dispatched",
+      "Properties": [
+        {
+          "Name": "State",
+          "DisplayName": "State",
+          "Description": "Holds the state of the contract",
+          "Type": {
+            "Name": "state"
+          }
+        },
+        {
+          "Name": "BHEL",
+          "DisplayName": "BHEL",
+          "Description": "...",
+          "Type": {
+            "Name": "BHEL"
+          }
+        },
+        {
+          "Name": "Counterparty",
+          "DisplayName": "Current Party",
+          "Description": "...",
+          "Type": {
+            "Name": "Counterparty"
+          }
+        },
+        {
+          "Name": "PreviousCounterparty",
+          "DisplayName": "Last Party",
+          "Description": "...",
+          "Type": {
+            "Name": "Counterparty"
+          }
+        },
+
+        {
+          "Name": "SupplyChainObserver",
+          "DisplayName": "Observer",
+          "Description": "The observer overseeing the shipment.",
+          "Type": {
+            "Name": "Observer"
+          }
+        },
+        {
+          "Name": "SealSt",
+          "DisplayName": "SealSt",
+          "Description": "...",
+          "Type": {
+            "Name": "bool"
+          }
+        },
+        {
+          "Name": "pass",
+          "Description": "...",
+          "DisplayName": "Password",
+          "Type": {
+            "Name": "int"
+          }
+        },
+        {
+          "Name": "passs",
+          "Description": "...",
+          "DisplayName": "Password",
+          "Type": {
+            "Name": "int"
+          }
+        }
+      ],
+      "Constructor": {
+        "Parameters": [
+
+          {
+            "Name": "supplyChainObservers",
+            "Description": "...",
+            "DisplayName": "Observer",
+            "Type": {
+              "Name": "Observer"
+            }
+          },
+          {
+            "Name": "SealSts",
+            "Description": "...",
+            "DisplayName": "SealSt",
+            "Type": {
+              "Name": "bool"
+            }
+          },
+          {
+            "Name": "pass1",
+            "Description": "...",
+            "DisplayName": "Password",
+            "Type": {
+              "Name": "int"
+            }
+          }
+        ]
+      },
+      "Functions": [
+        {
+          "Name": "IngestTelemetry",
+          "DisplayName": "Ingest Telemetry",
+          "Description": "...",
+          "Parameters": [
+            {
+              "Name": "SealStf",
+              "Description": "...",
+              "DisplayName": "SealSt",
+              "Type": {
+                "Name": "bool"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "TransferResponsibility",
+          "DisplayName": "Transfer Responsibility",
+          "Description": "...",
+          "Parameters": [
+            {
+              "Name": "newCounterparty",
+              "Description": "...",
+              "DisplayName": "Party",
+              "Type": {
+                "Name": "Counterparty"
+              }
+            },
+            {
+              "Name": "SealSt",
+              "Description": "...",
+              "DisplayName": "SealSt",
+              "Type": {
+                "Name": "bool"
+                }
+            }
+          ]
+        },
+        {
+          "Name": "Complete",
+          "DisplayName": "Complete",
+          "Description": "...",
+          "Parameters": [
+            {
+              "Name": "passs",
+              "Description": "...",
+              "DisplayName": "Password",
+              "Type": {
+                "Name": "int"
+              }
+            }
+          ]
+        },
+      ],
+      "States": [
+        {
+          "Name": "Dispatched",
+          "DisplayName": "Dispatched",
+          "Description": "...",
+          "PercentComplete": 10,
+          "Value": 0,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": [ "BHEL" ],
+              "Description": "...",
+              "Function": "TransferResponsibility",
+              "NextStates": [ "InTransit" ],
+              "DisplayName": "Transfer Responsibility"
+            },
+
+          ]
+        },
+        {
+          "Name": "InTransit",
+          "DisplayName": "In Transit",
+          "Description": "...",
+          "PercentComplete": 50,
+          "Value": 1,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": [ "Counterparty" ],
+              "Description": "...",
+              "Function": "TransferResponsibility",
+              "NextStates": [ "InTransit" ],
+              "DisplayName": "Transfer Responsibility"
+            },
+            {
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": [ "Counterparty" ],
+              "Description": "...",
+              "Function": "Complete",
+              "NextStates": [ "Completed" ],
+              "DisplayName": "Completed"
+            }
+          ]
+        },
+        {
+          "Name": "Completed",
+          "DisplayName": "Completed",
+          "Description": "...",
+          "PercentComplete": 100,
+          "Value": 2,
+          "Style": "Success",
+          "Transitions": []
+        },
+        {
+
+          "Name": "Failed",
+          "DisplayName": "Failed",
+          "Description": "...",
+          "PercentComplete": 100,
+          "Value": 2,
+          "Style": "Failure",
+          "Transitions": []
+
+        }
+      ]
+    }
+  ]
+}
